@@ -1,0 +1,11 @@
+language: ruby
+addons:
+  apt:
+    packages:
+    - expect
+    - gnupg-agent
+    - rpm
+script:
+- make test
+- bundle exec make packages-deb
+- bundle exec make packages-rpm

@@ -125,6 +125,10 @@ clean:
 #
 test: confidence
 confidence:
+ifdef CI
+	@echo "WARNING: Removing ~/.gnupg"
+	@rm -rf ~/.gnupg
+endif
 	@if [ -e ~/.gnupg ]; then echo ERROR: '~/.gnupg should not exist. If it does, bugs may polute your .gnupg configuration. If the code has no bugs everything will be fine. Do you feel lucky?'; false ; fi
 	@if which >/dev/null gpg-agent ; then pkill gpg-agent ; rm -rf /tmp/tmp.* ; fi
 	@export PATH="$(PWD)/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/local/bin:$(PATH)" ; tools/auto_system_test
